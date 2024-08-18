@@ -22,7 +22,6 @@ def dfs(node, parent):
     global b
     global answer
     global ad
-    a[node] = True
     for child in ad[node]:
         if(child == parent):
             continue
