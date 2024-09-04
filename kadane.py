@@ -6,17 +6,20 @@
 
 def solution(sequence):
     answer = 0
+    #결국 이 문제는 홀수번째에 -를 곱한 수열과 짝수번째의 -를 곱한 수열의 최대 부분합을 구해 둘 중 큰 것을 고르는 문제임
     a = [sequence[i] * (-1)**i for i in range (len(sequence))]
     b = [sequence[i] * (-1)**(i+1) for i in range (len(sequence))]
     answer = max(kadane(a), kadane(b))
     return answer
-
+#카단 알고리즘 -> 어떤 배열의 최대 부분합을 구하는 알고리즘 O(N)
+#lsum : 지금까지의 부분 합
+#gsum : 최대 부분합
 def kadane(sequence):
     lsum = sequence[0]
     gsum = sequence[0]
     
     for i in range(1, len(sequence)):
-        lsum += sequence[i]
-        lsum = max(lsum, sequence[i])
-        gsum = max(lsum, gsum)
+        lsum += sequence[i] #부분합 추가
+        lsum = max(lsum, sequence[i]) #지금까지의 부분합보다 현재 숫자가 더크면 -> 여기서부터 시작하는게 더 큼
+        gsum = max(lsum, gsum) #최대 부분합 업데이트
     return gsum
